@@ -24,6 +24,23 @@ in
     ];
   };
 
+  systemd.user.services.init-user-config = {
+    description = "Initialize user config files";
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = ''
+        mkdir -p /home/frivermen/.config
+        cp ${./dotfiles/bashrc} /home/frivermen/.bashrc
+        cp ${./dotfiles/gitconfig} /home/frivermen/.gitconfig
+        cp -r ${./dotfiles/config/*} /home/frivermen/.config/
+        chown -R frivermen:users /home/frivermen/.bashrc /home/frivermen/.gitconfig /home/frivermen/.config
+      '';
+      User = "frivermen";
+    };
+    wantedBy = [ "default.target" ];
+  };
+
   services.greetd = {
     enable = true;
     settings = rec {
