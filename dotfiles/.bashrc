@@ -23,6 +23,10 @@ alias mount='udisksctl mount -b'
 alias bs='cat ~/.bash_history | grep'
 alias feh='feh -.Z $@'
 
+alias nsearch='nix --extra-experimental-features "nix-command flakes" search nixpkgs'
+alias nedit='sudo hx /etc/nixos/configuration.nix'
+alias nswitch='sudo nixos-rebuild switch'
+
 export HISTSIZE=9000
 export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r;"
 export EDITOR=hx

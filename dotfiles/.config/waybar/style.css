@@ -3,10 +3,29 @@
     font-size: 14px; 
     font-weight: bold;
     min-height: 0;
+    border-radius: 10px;
+    box-shadow: none;
+}
+
+menu {
+    border-radius: 10px;
+    color: #3c3836;
+    background: #fbf1c7;
+}
+
+menuitem {
+    border-radius: 10px;
+}
+
+#custom-button {
+    color: #3c3836;
+    background: #fbf1c7;
+    margin-right: 5px;
 }
 
 window#waybar {
     background: transparent;
+    /* background: rgba(0xfb,0xf1,0xc7,0.2); */
 }
 
 window#waybar.hidden {
@@ -14,6 +33,7 @@ window#waybar.hidden {
 }
 
 #workspaces {
+    margin-left: 5px;
     margin-right: 5px;
     border-radius: 10px;
     transition: none;
@@ -24,6 +44,8 @@ window#waybar.hidden {
     color: #928374;
     transition: none;
     background: transparent;
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
@@ -36,7 +58,7 @@ window#waybar.hidden {
     background: #f9f5d7;
 }
 
-#workspaces button.persistent {
+#workspaces button.urgent {
     color: #fbf1c7;
     background: #fe8019;
     border-radius: inherit;
@@ -50,7 +72,10 @@ window#waybar.hidden {
 
 #language,
 #clock,
-#memory {
+tooltip,
+#temperature,
+#memory,
+#pulseaudio {
     border-radius: 10px;
     margin-right: 5px;
     margin-left: 5px;

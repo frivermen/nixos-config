@@ -1,0 +1,85 @@
+[
+  {
+    "position": "top",
+    "layer": "top",
+    "margin": "10 10 0 10",
+    "modules-left": [
+      "hyprland/workspaces",
+      "custom/button",
+    ],
+    "modules-center": [
+      "clock",
+    ],
+    "modules-right": [
+      "temperature",
+      "memory",
+      "pulseaudio",
+      "hyprland/language",
+      "tray",
+    ],
+    "hyprland/workspaces": {
+      "disable-scroll": true,
+    },
+    "custom/button": {
+      "format" : "+",
+      "tooltip": false,
+      "min-length": 3,
+      "on-click": "hyprctl dispatch workspace empty",
+      "menu": "on-click-right",
+      "menu-file": "~/.config/waybar/power_menu.xml",
+      "menu-actions": {
+          "shutdown": "systemctl shutdown now",
+          "reboot": "systemctl reboot",
+          "suspend": "systemctl suspend",
+          "hibernate": "systemctl hibernate",
+          "wofi": "wofi --show drun -i -l 1 -x 10 -y 10",
+      },
+    },
+    "clock": {
+      "format": "{:%d.%m.%Y %H:%M}",
+      "min-length": 18,
+      "tooltip-format": "{calendar}",
+      "on-scroll"     : 1,
+      "calendar": {
+        "mode"          : "year",
+        "mode-mon-col"  : 3,
+      },
+      "actions":  {
+        "on-click-left": "calendar",
+        "on-scroll-up": "shift_up",
+        "on-scroll-down": "shift_down"
+      }
+    },
+    "temperature": {
+      "thermal-zone": 0,
+      "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
+      "format": "{temperatureC}°C",
+      "tooltip-format": "CPU temp",
+      "min-length": 6,
+    },
+    "memory": {
+      "interval": 10,
+      "format": "R{}%",
+      "min-length": 6,
+    },
+    "pulseaudio": {
+      "format": "V{volume}%",
+      "format-bluetooth": "  V{volume}% ",
+      "format-muted": "MUTE",
+      "min-length": 7,
+      "on-click": "pavucontrol",
+      "tooltip-format": "scroll or click",
+    },
+    "hyprland/language": {
+      "format-en": "EN",
+      "format-ru": "RU",
+      "min-length": 5,
+      "on-click": "hyprctl switchxkblayout current prev",
+      "tooltip-format": "win + space",
+    },
+    "tray": {
+      "icon-size": 18,
+      "spacing": 5,
+    },
+  }
+]
