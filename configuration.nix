@@ -134,6 +134,14 @@ in
     trash-cli # trash for nnn
     zapret
     mesa-demos
+    yandex-disk
+    libreoffice-fresh
+    hunspell
+    hunspellDicts.ru_RU
+    hunspellDicts.en_US
+    hunspellDicts.en_GB-ize
+    hyphenDicts.ru_RU
+    hyphenDicts.en_US
     # Unstable packages
     unstable.nil # nix lsp for helix
   ];
