@@ -1,4 +1,5 @@
-{ config, lib, pkgs, ... }: let
+{ config, lib, pkgs, ... }:
+let
   # sudo nix-channel --add https://nixos.org/channels/nixpkgs-unstable unstable
   # sudo nix-channel --update
   unstable = import <unstable> {
@@ -97,6 +98,7 @@ in
   # amd overclocking and etc.
   services.lact.enable = true;
 
+  nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     # Stable packages
     android-file-transfer # android mount
@@ -142,6 +144,7 @@ in
     hunspellDicts.en_GB-ize
     hyphenDicts.ru_RU
     hyphenDicts.en_US
+    tree
     # Unstable packages
     unstable.nil # nix lsp for helix
   ];
