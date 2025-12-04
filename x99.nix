@@ -7,9 +7,11 @@ let
 in
 {
   imports = [
-    ./hardware-configuration.nix
+    /etc/nixos/hardware-configuration.nix
     (import "${home-manager}/nixos")
   ];
+
+  nixpkgs.config.allowUnfree = true;
 
   # boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [
@@ -33,6 +35,7 @@ in
     extraGroups = [
       "wheel"
       "networkmanager"
+      "vboxusers"
     ];
   };
 
@@ -160,6 +163,51 @@ in
       '';
     };
 
+    programs.zathura = {
+      enable = true;
+      options = {
+        notification-error-bg     = "rgba(251,241,199,1)"  ;# bg
+        notification-error-fg     = "rgba(157,0,6,1)"      ;# bright:red
+        notification-warning-bg   = "rgba(251,241,199,1)"  ;# bg
+        notification-warning-fg   = "rgba(181,118,20,1)"   ;# bright:yellow
+        notification-bg           = "rgba(251,241,199,1)"  ;# bg
+        notification-fg           = "rgba(121,116,14,1)"   ;# bright:green
+
+        completion-bg             = "rgba(213,196,161,1)"  ;# bg2
+        completion-fg             = "rgba(60,56,54,1)"     ;# fg
+        completion-group-bg       = "rgba(235,219,178,1)"  ;# bg1
+        completion-group-fg       = "rgba(146,131,116,1)"  ;# gray
+        completion-highlight-bg   = "rgba(7,102,120,1)"    ;# bright:blue
+        completion-highlight-fg   = "rgba(213,196,161,1)"  ;# bg2
+
+# Define the color in index mode
+        index-bg                  = "rgba(213,196,161,1)"  ;# bg2
+        index-fg                  = "rgba(60,56,54,1)"     ;# fg
+        index-active-bg           = "rgba(7,102,120,1)"    ;# bright:blue
+        index-active-fg           = "rgba(213,196,161,1)"  ;# bg2
+
+        inputbar-bg               = "rgba(251,241,199,1)"  ;# bg
+        inputbar-fg               = "rgba(60,56,54,1)"     ;# fg
+
+        statusbar-bg              = "rgba(213,196,161,1)"  ;# bg2
+        statusbar-fg              = "rgba(60,56,54,1)"     ;# fg
+
+        highlight-color           = "rgba(181,118,20,0.5)" ;# bright:yellow
+        highlight-active-color    = "rgba(175,58,3,0.5)"   ;# bright:orange
+
+        default-bg                = "rgba(251,241,199,1)"  ;# bg
+        default-fg                = "rgba(60,56,54,1)"     ;# fg
+        render-loading            = true;
+        render-loading-bg         = "rgba(251,241,199,1)"  ;# bg
+        render-loading-fg         = "rgba(60,56,54,1)"     ;# fg
+
+# Recolor book content's color
+        recolor-lightcolor        = "rgba(251,241,199,1)"  ;# bg
+        recolor-darkcolor         = "rgba(60,56,54,1)"     ;# fg
+        recolor                   = "true";
+        recolor-keephue           = "true"                 ;# keep original color
+      };
+    };
     programs.git = {
       enable = true;
       settings = {
@@ -193,8 +241,8 @@ in
     services.hyprpaper = {
       enable = true;
       settings = {
-        preload = [ "/etc/nixos/Morskie Oko.jpg" ];
-        wallpaper = [ ", /etc/nixos/Morskie Oko.jpg" ];
+        preload = [ "/etc/nixos/nixos-config/Morskie Oko.jpg" ];
+        wallpaper = [ ", /etc/nixos/nixos-config/Morskie Oko.jpg" ];
       };
     };
 
@@ -770,7 +818,10 @@ in
   # amd overclocking and etc.
   services.lact.enable = true;
 
-  nixpkgs.config.allowUnfree = true;
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableExtensionPack = true;
+  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
+
   environment.systemPackages = with pkgs; [
     # Stable packages
     android-file-transfer # android mount
@@ -820,6 +871,8 @@ in
     hyphenDicts.ru_RU
     hyphenDicts.en_US
     tree
+    progress
+    zathura
     # Unstable packages
     unstable.nil # nix lsp for helix
   ];
