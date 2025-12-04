@@ -237,6 +237,7 @@ in
         monitor = "HDMI-A-1";
         separator_color = "frame";
         corner_radius = 10;
+        font = "RobotoMono Nerd Font 18";
         background = "#3c3836";
         foreground = "#fbf1c7";
         frame_color = "#fe8019";
