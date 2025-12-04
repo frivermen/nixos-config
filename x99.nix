@@ -57,8 +57,13 @@ in
         export EDITOR=hx
         export VISUAL=hx
 
-      n ()
-      {
+        npush() {
+          git -C /etc/nixos/nixos-config/ add .
+          git -C /etc/nixos/nixos-config/ commit -a -m $*
+          git -C /etc/nixos/nixos-config/ push
+        }
+
+        n() {
           # Block nesting of nnn in subshells
           [ "''${NNNLVL:-0}" -eq 0 ] || {
               exit
@@ -88,17 +93,17 @@ in
               . "$NNN_TMPFILE"
               rm -f -- "$NNN_TMPFILE" > /dev/null
           }
-      }
+        }
 
-      lc() {
+        lc() {
           if [ -z "$2" ]; then
               lua -e "print(string.format('%.2f', $1))"  # по умолчанию 2 знака
           else
               lua -e "print(string.format('%.''${2}f', $1))"  # кастомный scale
           fi
-      }
+        }
 
-      u() { 
+        u() { 
           local mount_dir="/run/media/frivermen"
           local drives=()
           local choice selected i
@@ -144,7 +149,7 @@ in
               echo "Unmount failed"
               return 1
           fi
-      }
+        }
       '';
       shellAliases = {
         mount = "udisksctl mount -b";
