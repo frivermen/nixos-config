@@ -16,6 +16,7 @@ in
   # boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [
     "nct6775"
+    "pcspkr"
   ];
 
 
@@ -792,6 +793,16 @@ in
     MINSTOP=hwmon2/pwm1=100 hwmon2/pwm2=0
   '';
 
+  services.cron.enable = true;
+  services.cron.systemCronJobs = [
+    "50 11 * * 1-5 /run/current-system/sw/bin/beep -f 2800 -l 500"
+    "58 11 * * 1-5 /run/current-system/sw/bin/beep -f 2800 -l 500 -r 2"
+    " 0 12 * * 1-5 /run/current-system/sw/bin/beep -f 2800 -l 1000"
+    "50 15 * * 1-5 /run/current-system/sw/bin/beep -f 2800 -l 500"
+    "58 15 * * 1-5 /run/current-system/sw/bin/beep -f 2800 -l 500 -r 2"
+    " 0 16 * * 1-5 /run/current-system/sw/bin/beep -f 2800 -l 1000"
+  ];
+
   # usb automount
   services.udisks2.enable = true;
 
@@ -885,6 +896,10 @@ in
     imagemagick
     feh
     gnumeric
+    beep
+    (python3.withPackages (python-pkgs: with python-pkgs; [
+      tkinter
+    ]))
     # Unstable packages
     unstable.nil # nix lsp for helix
   ];
