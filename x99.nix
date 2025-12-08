@@ -59,7 +59,7 @@ in
 
         npush() {
           git -C /etc/nixos/nixos-config/ add .
-          git -C /etc/nixos/nixos-config/ commit -a -m $*
+          git -C /etc/nixos/nixos-config/ commit -a -m "update"
           git -C /etc/nixos/nixos-config/ push
         }
 
@@ -879,6 +879,7 @@ in
     tree
     progress
     zathura
+    exfat
     # Unstable packages
     unstable.nil # nix lsp for helix
   ];
