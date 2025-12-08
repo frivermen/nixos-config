@@ -247,8 +247,10 @@ in
     services.hyprpaper = {
       enable = true;
       settings = {
-        preload = [ "/etc/nixos/nixos-config/Morskie Oko.jpg" ];
-        wallpaper = [ ", /etc/nixos/nixos-config/Morskie Oko.jpg" ];
+        # preload = [ "/etc/nixos/nixos-config/Morskie Oko.jpg" ];
+        # wallpaper = [ ", /etc/nixos/nixos-config/Morskie Oko.jpg" ];
+        preload = [ "/etc/nixos/nixos-config/cow.jpg" ];
+        wallpaper = [ ", /etc/nixos/nixos-config/cow.jpg" ];
       };
     };
 
@@ -880,6 +882,9 @@ in
     progress
     zathura
     exfat
+    imagemagick
+    feh
+    gnumeric
     # Unstable packages
     unstable.nil # nix lsp for helix
   ];
