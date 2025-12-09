@@ -212,6 +212,8 @@ in
         recolor-darkcolor         = "rgba(60,56,54,1)"     ;# fg
         recolor                   = "true";
         recolor-keephue           = "true"                 ;# keep original color
+        # enable copy
+        selection-clipboard  = "clipboard";
       };
     };
     programs.git = {
@@ -897,6 +899,8 @@ in
     feh
     gnumeric
     beep
+    anydesk
+    rustdesk
     (python3.withPackages (python-pkgs: with python-pkgs; [
       tkinter
     ]))
