@@ -34,6 +34,7 @@ in
     isNormalUser = true;
     home = "/home/frivermen";
     extraGroups = [
+      "adbusers"
       "wheel"
       "networkmanager"
       "vboxusers"
@@ -895,6 +896,15 @@ in
   # amd overclocking and etc.
   services.lact.enable = true;
 
+  # adb
+  programs.adb.enable = true;
+
+  # # udev
+  # services.udev.packages = [
+  #   pkgs.android-udev-rules
+  # ];
+  
+  # virtualbox
   virtualisation.virtualbox.host.enable = true;
   virtualisation.virtualbox.host.enableExtensionPack = true;
   users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
@@ -956,7 +966,8 @@ in
     gnumeric
     beep
     anydesk
-    rustdesk
+    usbutils
+    # rustdesk
     (python3.withPackages (python-pkgs: with python-pkgs; [
       tkinter
     ]))
