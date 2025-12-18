@@ -280,7 +280,7 @@ in
           "name:6, monitor:$leftMonitor"
         ];
         "$terminal" = "foot";
-        "$fileManager" = "$terminal nnn";
+        "$fileManager" = "$terminal nnn -e -x -d";
         "$menu" = "wofi -i --show drun";
         "$screenshot" = "hyprshot -m region --clipboard-only";
         "exec-once" = [
@@ -345,7 +345,8 @@ in
           "$mainMod, A, exec, if mountpoint -q ~/mtp; then umount ~/mtp && notify-send 'MTP unmounted!'; else  mkdir -p ~/mtp && aft-mtp-mount ~/mtp && notify-send 'MTP mounted!'; fi"
 
           # modes
-          "$mainMod, F, togglefloating,"
+          # "$mainMod, F, togglefloating,"
+          "$mainMod, F, exec, hyprctl dispatch togglefloating && hyprctl dispatch centerwindow"
           "$mainMod, T, pseudo, # dwindle"
           "$mainMod, M, fullscreen, 1"
           "$mainMod SHIFT, M, fullscreen, 0"
