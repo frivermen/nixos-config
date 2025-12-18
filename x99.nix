@@ -253,8 +253,10 @@ in
       settings = {
         # preload = [ "/etc/nixos/nixos-config/Morskie Oko.jpg" ];
         # wallpaper = [ ", /etc/nixos/nixos-config/Morskie Oko.jpg" ];
-        preload = [ "/etc/nixos/nixos-config/cow.jpg" ];
-        wallpaper = [ ", /etc/nixos/nixos-config/cow.jpg" ];
+        # preload = [ "/etc/nixos/nixos-config/cow.jpg" ];
+        # wallpaper = [ ", /etc/nixos/nixos-config/cow.jpg" ];
+        preload = [ "/etc/nixos/nixos-config/nixos-wallpapers.png" ];
+        wallpaper = [ ", /etc/nixos/nixos-config/nixos-wallpapers.png" ];
       };
     };
 
@@ -967,6 +969,7 @@ in
     beep
     anydesk
     usbutils
+    vdhcoapp
     # rustdesk
     (python3.withPackages (python-pkgs: with python-pkgs; [
       tkinter
