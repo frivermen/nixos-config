@@ -783,6 +783,16 @@ in
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
   hardware.bluetooth.settings.General.ControllerMode = "bredr";
+  services.pipewire.wireplumber.extraConfig."10-bluez" = {
+    "monitor.bluez.properties" = {
+      "bluez5.roles" = [ "a2dp_sink" "a2dp_source" ];
+    };
+  };
+  services.pipewire.wireplumber.extraConfig."11-bluetooth-policy" = {
+    "wireplumber.settings" = {
+      "bluetooth.autoswitch-to-headset-profile" = false;
+    };
+  };
 
   networking.networkmanager.enable = true;
   systemd.services.NetworkManager-wait-online.enable = false;
