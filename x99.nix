@@ -38,6 +38,7 @@ in
       "wheel"
       "networkmanager"
       "vboxusers"
+      "bluetooth"
     ];
   };
 
@@ -781,6 +782,7 @@ in
 
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
+  hardware.bluetooth.settings.General.ControllerMode = "bredr";
 
   networking.networkmanager.enable = true;
   systemd.services.NetworkManager-wait-online.enable = false;
@@ -972,6 +974,10 @@ in
     usbutils
     vdhcoapp
     # rustdesk
+    qbittorrent
+    texliveFull
+    gnumake
+    pandoc
     (python3.withPackages (python-pkgs: with python-pkgs; [
       tkinter
     ]))
