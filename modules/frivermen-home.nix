@@ -380,6 +380,7 @@
           "tile, title:^(КОМПАС-3D.*)$"
           "size 800 600,class:^(kompas.exe)$,title:^(RoamingWindow)$"
           "float, class:^(wlvncc)$"
+          "workspace 7, class:^(wlvncc)$"
         ];
       };
     };
