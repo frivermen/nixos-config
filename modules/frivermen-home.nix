@@ -305,6 +305,7 @@
           "$mainMod SHIFT, return, exec, $terminal"
           "$mainMod, E, exec, $fileManager"
           "$mainMod, P, exec, $menu"
+          "$mainMod, O, exec, wlvncc 192.168.10.113 --auth-command 'zenity --password'"
           "$mainMod SHIFT, S, exec, $screenshot"
           "$mainMod SHIFT, C, killactive,"
           "$mainMod SHIFT, Q, exit,"
