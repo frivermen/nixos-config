@@ -295,6 +295,7 @@
         device = {
           name = "tpps/2-ibm-trackpoint";
           sensitivity = 0.3;
+          scroll_factor = 0.2;
           accel_profile = "flat";
         };
         misc = {
