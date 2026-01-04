@@ -292,6 +292,11 @@
           follow_mouse = 1;
           touchpad.tap_button_map = "lmr";
         };
+        device = {
+          name = "tpps/2-ibm-trackpoint";
+          sensitivity = 0.3;
+          accel_profile = "flat";
+        };
         misc = {
           disable_hyprland_logo = true;
           force_default_wallpaper = 0;
@@ -466,7 +471,8 @@
         tooltip,
         #temperature,
         #memory,
-        #pulseaudio {
+        #pulseaudio,
+        #battery {
             border-radius: 10px;
             margin-right: 5px;
             margin-left: 5px;
@@ -502,6 +508,7 @@
             "memory"
             "pulseaudio"
             "hyprland/language"
+            "battery"
             "tray"
           ];
           "hyprland/workspaces" = {
@@ -539,7 +546,7 @@
           };
           "memory" = {
             "interval" = 10;
-            "format" = "R{}%";
+            "format" = " R{percentage}% S{swapPercentage}% ";
             "min-length" = 6;
           };
           "pulseaudio" = {
@@ -556,6 +563,15 @@
             "min-length" = 5;
             "on-click" = "hyprctl switchxkblayout current prev";
             "tooltip-format" = "win + space";
+          };
+          "battery" = {
+              "bat" = "BAT0";
+              "format" = " {capacity}% ";
+              "format-charging" = "  {capacity}% ";
+              "format-not-charging" = "  {capacity}% ";
+              "format-full" = "  ";
+              "interval" = 30;
+              "tooltip" = false;
           };
           "tray" = {
             "icon-size" = 18;
