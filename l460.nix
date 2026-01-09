@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 let
   # sudo nix-channel --add https://nixos.org/channels/nixpkgs-unstable unstable
   # sudo nix-channel --update
@@ -40,6 +40,15 @@ in
     enable = true;
     settings.PasswordAuthentication = true;
     # settings.PermitRootLogin = "yes";
+  };
+
+  services.minidlna = {
+    enable = true;
+    settings = {
+      # user = "frivermen";
+      media_dir = [ "/srv/minidlna/" ];
+      db_dir = "/tmp/minidlna";
+    };
   };
 
   hardware.bluetooth.enable = true;
@@ -183,8 +192,11 @@ in
     hidapi
     libusb1
     bc
+    minidlna
     (python3.withPackages (python-pkgs: with python-pkgs; [
       tkinter
+      pandas
+      matplotlib
     ]))
     # Unstable packages
     unstable.nil # nix lsp for helix

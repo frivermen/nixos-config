@@ -1,3 +1,4 @@
+{config, ... }:
 {
   users.users.frivermen = {
     isNormalUser = true;
@@ -11,7 +12,7 @@
     ];
   };
 
-  home-manager.users.frivermen = { pkgs, ... }: {
+  home-manager.users.frivermen = { pkgs, lib, ... }: {
     programs.bash = {
       enable = true;
       initExtra = ''
@@ -138,6 +139,13 @@
       '';
     };
 
+    programs.mpv = {
+      enable = true;
+      config = {
+        target-colorspace-hint = false;
+      };
+    };
+
     programs.zathura = {
       enable = true;
       options = {
@@ -232,20 +240,27 @@
       enable = true;
       settings = {
         debug.disable_logs = false;
-        "$leftMonitor" = "HDMI-A-1";
-        "$rightMonitor" = "DVI-I-1";
-        # port DP-1, resolution 1920x1080, position 0x0, scale 1
-        monitor = [
-          "$leftMonitor, 2560x1440@59.95, 0x0, auto"
-          "$rightMonitor, 1920x1080@60, 2560x220, auto"
-        ];
+        "$mainMonitor" =
+          if config.networking.hostName == "x99-frivermen"
+          then "HDMI-A-1"
+          else "DP-2";
+        monitor = 
+          if config.networking.hostName == "x99-frivermen"
+          then [
+            "$mainMonitor, 2560x1440@59.95, 0x0, auto"
+            "DVI-I-1, 1920x1080@60, 2560x220, auto"
+          ]
+          else [
+            "$mainMonitor, 1920x1080@60, 0x0, auto"
+            "eDP-1, 1366x768@60.06, 277x1080, auto"
+          ];
         workspace = [
-          "name:1, monitor:$leftMonitor"
-          "name:2, monitor:$leftMonitor"
-          "name:3, monitor:$leftMonitor"
-          "name:4, monitor:$leftMonitor"
-          "name:5, monitor:$leftMonitor"
-          "name:6, monitor:$leftMonitor"
+          "name:1, monitor:$mainMonitor"
+          "name:2, monitor:$mainMonitor"
+          "name:3, monitor:$mainMonitor"
+          "name:4, monitor:$mainMonitor"
+          "name:5, monitor:$mainMonitor"
+          "name:6, monitor:$mainMonitor"
         ];
         "$terminal" = "foot";
         "$fileManager" = "$terminal nnn -e -x -d";
@@ -372,8 +387,8 @@
           ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
           ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
           ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-          ",XF86MonBrightnessUp, exec, brightnessctl -e4 -n2 set 5%+"
-          ",XF86MonBrightnessDown, exec, brightnessctl -e4 -n2 set 5%-"
+          ",XF86MonBrightnessUp, exec, brightnessctl -e4 set 2%+"
+          ",XF86MonBrightnessDown, exec, brightnessctl -e4 set 2%-"
         ];
         windowrulev2 = [
           "suppressevent maximize, class:.*"
@@ -540,7 +555,7 @@
           };
           "temperature" = {
             "thermal-zone" = 0;
-            "hwmon-path" = "/sys/class/hwmon/hwmon3/temp1_input";
+            "hwmon-path" = "/sys/class/hwmon/hwmon4/temp2_input";
             "format" = "{temperatureC}°C";
             "tooltip-format" = "CPU temp";
             "min-length" = 6;
