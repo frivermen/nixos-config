@@ -22,6 +22,7 @@ in
     "pcspkr"
   ];
 
+  boot.kernel.sysctl."net.ipv4.ip_forward" = "1";
 
   # boot.loader.systemd-boot.enable = true;
   # boot.loader.efi.canTouchEfiVariables = true;
@@ -111,6 +112,8 @@ in
   # amd overclocking and etc.
   services.lact.enable = true;
 
+  programs.firejail.enable = true;
+  
   # adb
   programs.adb.enable = true;
 
@@ -189,6 +192,25 @@ in
     inkscape
     gimp
     zenity
+    ncdu
+    cabextract
+    samba
+    file
+    unzip
+    unrar
+    minicom
+    rar
+    hashcat
+    john
+    libarchive
+    vim
+    squashfsTools
+    dnsmasq
+    gparted
+    sshfs
+    binwalk
+    ungoogled-chromium
+    smplayer
     (python3.withPackages (python-pkgs: with python-pkgs; [
       tkinter
     ]))

@@ -129,6 +129,7 @@
         nsearch = "nix --extra-experimental-features \"nix-command flakes\" search nixpkgs";
         nedit = "sudo hx /etc/nixos/configuration.nix";
         nswitch = "sudo nixos-rebuild switch";
+        cpg = "rsync -avG";
       };
       historyFileSize = 9000;
       historySize = 9000;
