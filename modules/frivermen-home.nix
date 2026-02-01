@@ -9,6 +9,7 @@
       "networkmanager"
       "vboxusers"
       "bluetooth"
+      "dialout"
     ];
   };
 

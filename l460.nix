@@ -51,6 +51,8 @@ in
     };
   };
 
+  hardware.saleae-logic.enable = true;
+
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
   hardware.bluetooth.settings.General.ControllerMode = "bredr";
@@ -75,7 +77,7 @@ in
 
   # vpn
   programs.amnezia-vpn.enable = true;
-  programs.amnezia-vpn.package = unstable.amnezia-vpn;
+  # programs.amnezia-vpn.package = unstable.amnezia-vpn;
 
   # usb automount
   services.udisks2.enable = true;
@@ -193,13 +195,19 @@ in
     libusb1
     bc
     minidlna
+    prusa-slicer
+    orca-slicer
+    file
+    ncdu
+    arduino-ide
+    chromium
     (python3.withPackages (python-pkgs: with python-pkgs; [
       tkinter
       pandas
       matplotlib
     ]))
     # Unstable packages
-    unstable.nil # nix lsp for helix
+    # unstable.nil # nix lsp for helix
   ];
 
   fonts.packages = with pkgs; [
