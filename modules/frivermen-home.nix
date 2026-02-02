@@ -279,6 +279,7 @@
           "blueman-applet"
           "udiskie --tray -f 'foot nnn'"
           "yandex-disk start"
+          "qbittorrent"
         ];
         env = [
           "XCURSOR_THEME,DMZ-Black"
