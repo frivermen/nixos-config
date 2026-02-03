@@ -211,6 +211,7 @@ in
     binwalk
     ungoogled-chromium
     smplayer
+    ty
     (python3.withPackages (python-pkgs: with python-pkgs; [
       tkinter
     ]))
