@@ -558,7 +558,7 @@
           };
           "temperature" = {
             "thermal-zone" = 0;
-            "hwmon-path" = "/sys/class/hwmon/hwmon4/temp2_input";
+            "hwmon-path" = "/sys/devices/platform/coretemp.0/hwmon/hwmon6/temp2_input";
             "format" = "{temperatureC}°C";
             "tooltip-format" = "CPU temp";
             "min-length" = 6;
