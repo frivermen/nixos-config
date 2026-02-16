@@ -212,6 +212,8 @@ in
     ungoogled-chromium
     smplayer
     ty
+    nix-search-cli
+    nmap
     (python3.withPackages (python-pkgs: with python-pkgs; [
       tkinter
     ]))

@@ -28,6 +28,8 @@
         export PROMPT_COMMAND="''${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r;"
         export EDITOR=hx
         export VISUAL=hx
+        export NIXPKGS_ALLOW_INSECURE=1
+        export NIXPKGS_ALLOW_UNFREE=1
 
         npush() {
           git -C /etc/nixos/nixos-config/ add .
@@ -148,6 +150,12 @@
       };
     };
 
+    xdg.mimeApps.enable = true;
+    xdg.mimeApps.defaultApplications = {
+      "video/mp4" = "smplayer.desktop";
+      "video/x-matroska" = "smplayer.desktop";
+      "audio/mpeg" = "smplayer.desktop";
+    };
     programs.zathura = {
       enable = true;
       options = {
@@ -211,6 +219,12 @@
       iconTheme.name = "breeze";
       cursorTheme.name = "Vanilla-DMZ-AA";
       cursorTheme.size = 24;
+    };
+
+    qt = {
+      enable = true;
+      platformTheme.name = "gtk3";
+      style.name = "breeze";
     };
 
     services.dunst = {
@@ -404,6 +418,7 @@
           "tile, title:^(КОМПАС-3D.*)$"
           "size 800 600,class:^(kompas.exe)$,title:^(RoamingWindow)$"
           "float, class:^(wlvncc)$"
+          "float, title:^(2048.*)$"
           "workspace 7, class:^(wlvncc)$"
         ];
       };
