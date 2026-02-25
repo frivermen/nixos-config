@@ -37,6 +37,11 @@ in
   home-manager.useGlobalPkgs = true;
   home-manager.backupFileExtension = "backup";
 
+  services.locate = {
+    enable = true;
+    package = pkgs.mlocate;
+  };
+
   services.openssh = {
     enable = true;
     settings.PasswordAuthentication = true;
@@ -122,6 +127,8 @@ in
   virtualisation.virtualbox.host.enableExtensionPack = true;
   users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
 
+  services.flatpak.enable = true;
+
   environment.systemPackages = with pkgs; [
     # Stable packages
     android-file-transfer # android mount
@@ -148,7 +155,6 @@ in
     mpv # video player
     p7zip
     pavucontrol
-    plocate # search files
     udiskie # automount usb
     vanilla-dmz # cursor theme
     waybar 
@@ -214,6 +220,7 @@ in
     ty
     nix-search-cli
     nmap
+    arduino-ide
     (python3.withPackages (python-pkgs: with python-pkgs; [
       tkinter
     ]))

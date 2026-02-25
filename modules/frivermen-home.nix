@@ -129,10 +129,12 @@
         mount = "udisksctl mount -b";
         bs = "cat ~/.bash_history | grep";
         feh = "feh -.Z $@";
-        nsearch = "nix --extra-experimental-features \"nix-command flakes\" search nixpkgs";
-        nedit = "sudo hx /etc/nixos/configuration.nix";
+        # nsearch = "nix --extra-experimental-features \"nix-command flakes\" search nixpkgs";
+        nsearch = "nix-search";
+        nedit = "sudo hx /etc/nixos/configuration.nix /etc/nixos/nixos-config/modules/frivermen-home.nix";
         nswitch = "sudo nixos-rebuild switch";
-        cpg = "rsync -avG";
+        cpg = "rsync -avP";
+        mvg = "rsync -avP --remove-source-files";
       };
       historyFileSize = 9000;
       historySize = 9000;
@@ -155,6 +157,12 @@
       "video/mp4" = "smplayer.desktop";
       "video/x-matroska" = "smplayer.desktop";
       "audio/mpeg" = "smplayer.desktop";
+      "text/html" = "firefox.desktop";
+      "x-scheme-handler/http" = "firefox.desktop";
+      "x-scheme-handler/https" = "firefox.desktop";
+      "x-scheme-handler/about" = "firefox.desktop";
+      # Optional, for other less common URL schemes
+      "x-scheme-handler/unknown" = "firefox.desktop";
     };
     programs.zathura = {
       enable = true;
