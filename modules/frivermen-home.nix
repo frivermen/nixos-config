@@ -421,6 +421,7 @@
           "workspace 2 silent, class:firefox"
           "workspace 3 silent, class:^(com.ayugram.desktop|com.telegram.desktop)$"
           "workspace 4, class:^(kompas.exe)$"
+          "workspace 11 silent, class:org.qbittorrent.qBittorrent"
           "noblur, class:^(kompas.exe)$"
           "opaque, title:^(КОМПАС-3D.*)$ "
           "tile, title:^(КОМПАС-3D.*)$"
