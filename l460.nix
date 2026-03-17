@@ -112,6 +112,12 @@ in
   # adb
   programs.adb.enable = true;
 
+  programs.firefox.languagePacks = [ "ru" ];
+
+  services.tor = {
+    enable = true; 
+  };
+
   # virtualbox
   #virtualisation.virtualbox.host.enable = true;
   #virtualisation.virtualbox.host.enableExtensionPack = true;
@@ -150,7 +156,7 @@ in
     waybar 
     wget
     wlvncc # vnc client
-    wineWowPackages.unstableFull # wine
+    # wineWowPackages.unstableFull # wine
     winetricks
     wofi # apps launcher
     wl-clipboard
@@ -196,11 +202,15 @@ in
     bc
     minidlna
     prusa-slicer
-    orca-slicer
     file
     ncdu
     arduino-ide
-    chromium
+    ungoogled-chromium
+    localsend
+    deltachat-desktop
+    nix-search-cli
+    ty
+    tor-browser
     (python3.withPackages (python-pkgs: with python-pkgs; [
       tkinter
       pandas
