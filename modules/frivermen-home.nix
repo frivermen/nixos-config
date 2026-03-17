@@ -131,7 +131,7 @@
         feh = "feh -.Z $@";
         # nsearch = "nix --extra-experimental-features \"nix-command flakes\" search nixpkgs";
         nsearch = "nix-search";
-        nedit = "sudo hx /etc/nixos/configuration.nix /etc/nixos/nixos-config/modules/frivermen-home.nix";
+        nedit = "sudo -E hx /etc/nixos/configuration.nix /etc/nixos/nixos-config/modules/frivermen-home.nix";
         nswitch = "sudo nixos-rebuild switch";
         cpg = "rsync -avP";
         mvg = "rsync -avP --remove-source-files";
@@ -321,13 +321,14 @@
           rounding_power = 2;
           active_opacity = 1.0;
           inactive_opacity = 0.95;
-          blur.enabled = true;
+          blur.enabled = false;
           shadow.enabled = true;
         };
         animations.enabled = false;
         input = {
           kb_layout = "us,ru";
-          kb_options = "grp:win_space_toggle, ctrl:nocaps";
+          kb_options = "grp:win_space_toggle, compose:menu";
+          # kb_options = "grp:win_space_toggle, ctrl:nocaps";
           sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
           follow_mouse = 1;
           touchpad.tap_button_map = "lmr";
@@ -724,6 +725,8 @@
         };
       };
     };
+
+    # home.file.".XCompose".source = "${pkgs.keyd}/share/keyd/keyd.compose";
 
     home.stateVersion = "25.11";
   };  

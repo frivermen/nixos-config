@@ -37,6 +37,8 @@ in
   home-manager.useGlobalPkgs = true;
   home-manager.backupFileExtension = "backup";
 
+  hardware.saleae-logic.enable = true;
+
   services.locate = {
     enable = true;
     package = pkgs.mlocate;
@@ -50,7 +52,12 @@ in
 
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
-  hardware.bluetooth.settings.General.ControllerMode = "bredr";
+  hardware.bluetooth.settings = {
+    General = {
+      ControllerMode = "bredr";
+      Experimental = true;
+    };
+  };
   services.pipewire.wireplumber.extraConfig."10-bluez" = {
     "monitor.bluez.properties" = {
       "bluez5.roles" = [ "a2dp_sink" "a2dp_source" ];
@@ -128,6 +135,29 @@ in
   users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
 
   services.flatpak.enable = true;
+
+  services.keyd = {
+    enable = true;
+    keyboards = {
+      default = {
+        ids = ["*"];
+        settings = {
+          main = {
+            capslock = "overload(control, esc)";
+            insert = "S-insert";
+          };
+          shift = {
+          	leftshift = "capslock";
+          	rightshift = "capslock";
+          };
+        };
+      };
+    };
+  };
+
+  environment.sessionVariables."XCOMPOSEFILE" = "${pkgs.keyd}/share/keyd/keyd.compose";
+
+  nixpkgs.config.android_sdk.accept_license = true;
 
   environment.systemPackages = with pkgs; [
     # Stable packages
@@ -221,8 +251,11 @@ in
     nix-search-cli
     nmap
     arduino-ide
+    # android-studio-full
+    scrcpy
     (python3.withPackages (python-pkgs: with python-pkgs; [
       tkinter
+      pexpect
     ]))
     # Unstable packages
     unstable.nil # nix lsp for helix
