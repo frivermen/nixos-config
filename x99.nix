@@ -15,6 +15,7 @@ in
   ];
 
   nixpkgs.config.allowUnfree = true;
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [
@@ -157,9 +158,21 @@ in
 
   environment.sessionVariables."XCOMPOSEFILE" = "${pkgs.keyd}/share/keyd/keyd.compose";
 
+  # services.tor = {
+  #   enable = true;
+  #   client.enable = true;
+  #   torsocks.enable = true;
+  #   torsocks.server = "127.0.0.1:9050";
+  #   settings = {
+  #     UseBridges = true;
+  #     Bridge = "snowflake 192.0.2.4:80 8838024498816A039FCBBAB14E6F40A0843051FA fingerprint=8838024498816A039FCBBAB14E6F40A0843051FA url=https://1098762253.rsc.cdn77.org fronts=cdn.zk.mk,img.icons8.com,cdn.kde.org ice=stun:stun.antisip.com:3478,stun:stun.epygi.com:3478,stun:stun.uls.co.za:3478,stun:stun.nextcloud.com:3478,stun:stun.bethesda.net:3478,stun:stun.nextcloud.com:443 utls-imitate=hellorandomizedalpn";
+  #   };
+  # };
+
   nixpkgs.config.android_sdk.accept_license = true;
 
   environment.systemPackages = with pkgs; [
+    tor-browser
     # Stable packages
     android-file-transfer # android mount
     ayugram-desktop # telegram client
@@ -253,6 +266,9 @@ in
     arduino-ide
     # android-studio-full
     scrcpy
+    net-tools
+    localsend
+    jpegoptim
     (python3.withPackages (python-pkgs: with python-pkgs; [
       tkinter
       pexpect
