@@ -24,6 +24,19 @@ in
   ];
 
   boot.kernel.sysctl."net.ipv4.ip_forward" = "1";
+  # boot.kernelParams = [
+    # "processor.max_cstate=1"
+    # "intel_idle.max_cstate=0"
+    # "intel_pstate=disable"
+    # "intel_cstate.disable=1"
+    # "processor.ignore_ppc=1"
+    # "idle=poll"
+    # "pcie_aspm=off"
+    # "amdgpu.noretry=0"
+    # "pci=noaer"
+    # "acpi=off"
+  # ];
+  powerManagement.cpuFreqGovernor = "performance";
 
   # boot.loader.systemd-boot.enable = true;
   # boot.loader.efi.canTouchEfiVariables = true;
@@ -87,10 +100,6 @@ in
     MINSTOP=hwmon2/pwm1=100 hwmon2/pwm2=0
   '';
 
-  # vpn
-  programs.amnezia-vpn.enable = true;
-  programs.amnezia-vpn.package = unstable.amnezia-vpn;
-
   # usb automount
   services.udisks2.enable = true;
 
@@ -109,6 +118,10 @@ in
     xwayland.enable = true;
   };
 
+  # services.xserver.enable = true;
+  # services.xserver.displayManager.lightdm.enable = true;
+  # services.xserver.desktopManager.lxqt.enable = true;
+
   environment.sessionVariables = {
     # fix invisible cursor
     WLR_NO_HARDWARE_CURSORS = "1";
@@ -121,7 +134,6 @@ in
     graphics.enable = true;
     amdgpu.legacySupport.enable = true;
   };
-
   # amd overclocking and etc.
   services.lact.enable = true;
 
@@ -157,17 +169,6 @@ in
   };
 
   environment.sessionVariables."XCOMPOSEFILE" = "${pkgs.keyd}/share/keyd/keyd.compose";
-
-  # services.tor = {
-  #   enable = true;
-  #   client.enable = true;
-  #   torsocks.enable = true;
-  #   torsocks.server = "127.0.0.1:9050";
-  #   settings = {
-  #     UseBridges = true;
-  #     Bridge = "snowflake 192.0.2.4:80 8838024498816A039FCBBAB14E6F40A0843051FA fingerprint=8838024498816A039FCBBAB14E6F40A0843051FA url=https://1098762253.rsc.cdn77.org fronts=cdn.zk.mk,img.icons8.com,cdn.kde.org ice=stun:stun.antisip.com:3478,stun:stun.epygi.com:3478,stun:stun.uls.co.za:3478,stun:stun.nextcloud.com:3478,stun:stun.bethesda.net:3478,stun:stun.nextcloud.com:443 utls-imitate=hellorandomizedalpn";
-  #   };
-  # };
 
   nixpkgs.config.android_sdk.accept_license = true;
 
@@ -251,6 +252,7 @@ in
     rar
     hashcat
     john
+    steam-run
     libarchive
     vim
     squashfsTools
