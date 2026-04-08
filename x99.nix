@@ -15,6 +15,7 @@ in
   ];
 
   nixpkgs.config.allowUnfree = true;
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [
@@ -23,6 +24,19 @@ in
   ];
 
   boot.kernel.sysctl."net.ipv4.ip_forward" = "1";
+  # boot.kernelParams = [
+    # "processor.max_cstate=1"
+    # "intel_idle.max_cstate=0"
+    # "intel_pstate=disable"
+    # "intel_cstate.disable=1"
+    # "processor.ignore_ppc=1"
+    # "idle=poll"
+    # "pcie_aspm=off"
+    # "amdgpu.noretry=0"
+    # "pci=noaer"
+    # "acpi=off"
+  # ];
+  powerManagement.cpuFreqGovernor = "performance";
 
   # boot.loader.systemd-boot.enable = true;
   # boot.loader.efi.canTouchEfiVariables = true;
@@ -86,10 +100,6 @@ in
     MINSTOP=hwmon2/pwm1=100 hwmon2/pwm2=0
   '';
 
-  # vpn
-  programs.amnezia-vpn.enable = true;
-  programs.amnezia-vpn.package = unstable.amnezia-vpn;
-
   # usb automount
   services.udisks2.enable = true;
 
@@ -108,6 +118,10 @@ in
     xwayland.enable = true;
   };
 
+  # services.xserver.enable = true;
+  # services.xserver.displayManager.lightdm.enable = true;
+  # services.xserver.desktopManager.lxqt.enable = true;
+
   environment.sessionVariables = {
     # fix invisible cursor
     WLR_NO_HARDWARE_CURSORS = "1";
@@ -120,7 +134,6 @@ in
     graphics.enable = true;
     amdgpu.legacySupport.enable = true;
   };
-
   # amd overclocking and etc.
   services.lact.enable = true;
 
@@ -160,6 +173,7 @@ in
   nixpkgs.config.android_sdk.accept_license = true;
 
   environment.systemPackages = with pkgs; [
+    tor-browser
     # Stable packages
     android-file-transfer # android mount
     ayugram-desktop # telegram client
@@ -238,6 +252,7 @@ in
     rar
     hashcat
     john
+    steam-run
     libarchive
     vim
     squashfsTools
@@ -253,6 +268,9 @@ in
     arduino-ide
     # android-studio-full
     scrcpy
+    net-tools
+    localsend
+    jpegoptim
     (python3.withPackages (python-pkgs: with python-pkgs; [
       tkinter
       pexpect

@@ -128,7 +128,7 @@
       shellAliases = {
         mount = "udisksctl mount -b";
         bs = "cat ~/.bash_history | grep";
-        feh = "feh -.Z $@";
+        feh = "feh -d.Z $@";
         # nsearch = "nix --extra-experimental-features \"nix-command flakes\" search nixpkgs";
         nsearch = "nix-search";
         nedit = "sudo -E hx /etc/nixos/configuration.nix /etc/nixos/nixos-config/modules/frivermen-home.nix";
@@ -296,6 +296,7 @@
           # "hyprpaper"
           # "dunst"
           "firefox"
+          "tor-browser"
           "AyuGram"
           "ciadpi -o1 -s4 -s6 -a1"
           "nm-applet"
@@ -327,7 +328,7 @@
         animations.enabled = false;
         input = {
           kb_layout = "us,ru";
-          kb_options = "grp:win_space_toggle, compose:menu";
+          kb_options = "grp:win_space_toggle, compose:ralt";
           # kb_options = "grp:win_space_toggle, ctrl:nocaps";
           sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
           follow_mouse = 1;
@@ -423,6 +424,7 @@
           "workspace 3 silent, class:^(com.ayugram.desktop|com.telegram.desktop)$"
           "workspace 4, class:^(kompas.exe)$"
           "workspace 11 silent, class:org.qbittorrent.qBittorrent"
+          "workspace 12 silent, class:Tor Browser"
           "noblur, class:^(kompas.exe)$"
           "opaque, title:^(КОМПАС-3D.*)$ "
           "tile, title:^(КОМПАС-3D.*)$"
