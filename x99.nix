@@ -153,7 +153,7 @@ in
     enable = true;
     keyboards = {
       default = {
-        ids = ["*"];
+        ids = [ "*" ];
         settings = {
           main = {
             capslock = "overload(control, esc)";
@@ -271,6 +271,8 @@ in
     net-tools
     localsend
     jpegoptim
+    deltachat-desktop
+    freecad
     (python3.withPackages (python-pkgs: with python-pkgs; [
       tkinter
       pexpect
