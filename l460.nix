@@ -51,8 +51,6 @@ in
     };
   };
 
-  hardware.saleae-logic.enable = true;
-
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
   hardware.bluetooth.settings.General.ControllerMode = "bredr";
@@ -67,6 +65,7 @@ in
     };
   };
 
+  # co2mon
   services.udev.extraRules = ''
   SUBSYSTEM=="usb", ATTRS{idVendor}=="04d9", ATTRS{idProduct}=="a052", MODE="0666"
   '';
@@ -74,10 +73,6 @@ in
   networking.networkmanager.enable = true;
   systemd.services.NetworkManager-wait-online.enable = false;
   systemd.services.firewall.enable = false;
-
-  # vpn
-  programs.amnezia-vpn.enable = true;
-  # programs.amnezia-vpn.package = unstable.amnezia-vpn;
 
   # usb automount
   services.udisks2.enable = true;
@@ -114,9 +109,28 @@ in
 
   programs.firefox.languagePacks = [ "ru" ];
 
-  services.tor = {
-    enable = true; 
+  services.keyd = {
+    enable = true;
+    keyboards = {
+      default = {
+        ids = ["*"];
+        settings = {
+          main = {
+            capslock = "overload(control, esc)";
+            insert = "S-insert";
+          };
+          shift = {
+          	leftshift = "capslock";
+          	rightshift = "capslock";
+          };
+        };
+      };
+    };
   };
+
+  environment.sessionVariables."XCOMPOSEFILE" = "${pkgs.keyd}/share/keyd/keyd.compose";
+
+  services.flatpak.enable = true;
 
   # virtualbox
   #virtualisation.virtualbox.host.enable = true;
@@ -125,6 +139,7 @@ in
 
   environment.systemPackages = with pkgs; [
     # Stable packages
+    unrar
     brightnessctl
     android-file-transfer # android mount
     ayugram-desktop # telegram client
@@ -135,6 +150,7 @@ in
     foot # terminal emulator
     git
     helix # editor
+    net-tools
     htop
     hyprpaper # wallpaper setter
     hyprshot # sceenshoter
@@ -157,11 +173,11 @@ in
     wget
     wlvncc # vnc client
     # wineWowPackages.unstableFull # wine
-    winetricks
+    # winetricks
     wofi # apps launcher
     wl-clipboard
     trash-cli # trash for nnn
-    zapret
+    # zapret
     mesa-demos
     yandex-disk
     libreoffice-fresh
@@ -183,7 +199,6 @@ in
     anydesk
     usbutils
     vdhcoapp
-    # rustdesk
     qbittorrent
     texliveFull
     gnumake
@@ -211,6 +226,7 @@ in
     nix-search-cli
     ty
     tor-browser
+    freecad
     (python3.withPackages (python-pkgs: with python-pkgs; [
       tkinter
       pandas
