@@ -37,6 +37,10 @@
           git -C /etc/nixos/nixos-config/ push
         }
 
+        npull() {
+          git -C /etc/nixos/nixos-config/ pull
+        }
+
         n() {
           # Block nesting of nnn in subshells
           [ "''${NNNLVL:-0}" -eq 0 ] || {
