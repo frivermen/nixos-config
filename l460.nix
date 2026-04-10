@@ -31,6 +31,8 @@ in
 
   networking.hostName = "l460-frivermen";
   i18n.defaultLocale = "ru_RU.UTF-8";
+  console.font = "cyr-sun16";
+  console.keyMap = "ruwin_alt_sh-UTF-8"; 
   time.timeZone = "Asia/Yekaterinburg";
 
   home-manager.useGlobalPkgs = true;
