@@ -233,7 +233,8 @@ in
       matplotlib
     ]))
     # Unstable packages
-    # unstable.nil # nix lsp for helix
+    unstable.nil # nix lsp for helix
+    unstable.ollama-cpu
   ];
 
   fonts.packages = with pkgs; [
