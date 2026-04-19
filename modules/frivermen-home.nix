@@ -279,8 +279,8 @@
             "DVI-I-1, 1920x1080@60, 2560x220, auto"
           ]
           else [
-            "$mainMonitor, 1920x1080@60, 0x0, auto"
-            "eDP-1, 1366x768@60.06, 277x1080, auto"
+            "$mainMonitor, 1920x1080@60, 0x0, 1"
+            "eDP-1, 1920x1080@60, 0x1080, 1"
           ];
         workspace = [
           "name:1, monitor:$mainMonitor"
@@ -364,6 +364,7 @@
           "$mainMod SHIFT, B, exec, pkill waybar && hyprctl dispatch exec waybar"
           "$mainMod, V, exec, [float; size 1000 750] pavucontrol"
           "$mainMod, A, exec, if mountpoint -q ~/mtp; then umount ~/mtp && notify-send 'MTP unmounted!'; else  mkdir -p ~/mtp && aft-mtp-mount ~/mtp && notify-send 'MTP mounted!'; fi"
+          "$mainMod, L, exec, localsend_app"
 
           # modes
           # "$mainMod, F, togglefloating,"
@@ -380,6 +381,7 @@
 
           # switch to tag
           "$mainMod, TAB, workspace, previous"
+          "$mainMod, n, workspace, emptyn"
           "$mainMod, 1, workspace, 1"
           "$mainMod, 2, workspace, 2"
           "$mainMod, 3, workspace, 3"
