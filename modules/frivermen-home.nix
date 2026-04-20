@@ -302,7 +302,9 @@
           "firefox"
           "tor-browser"
           "AyuGram"
-          "ciadpi -o1 -s4 -s6 -a1"
+          "deltachat"
+          # "ciadpi -o1 -s4 -s6 -a1"
+          "ciadpi -d1 -s4 -d8 -s1+s -d5+s -s10+s -d20+s -a1"
           "nm-applet"
           "blueman-applet"
           "udiskie --tray -f 'foot nnn'"
@@ -320,6 +322,10 @@
           "col.inactive_border" = "rgba(e6dcb2AA)";
           "col.active_border" = "rgba(fe8019AA)";
           layout = "dwindle";
+        };
+        dwindle = {
+          pseudotile = true;
+          preserve_split = true;
         };
         decoration = {
           rounding = 10;
@@ -370,6 +376,8 @@
           # "$mainMod, F, togglefloating,"
           "$mainMod, F, exec, hyprctl dispatch togglefloating && hyprctl dispatch centerwindow"
           "$mainMod, T, pseudo, # dwindle"
+          "$mainMod SHIFT, T, layoutmsg, togglesplit # horizontal split"
+          "$mainMod, return, layoutmsg, swapsplit"
           "$mainMod, M, fullscreen, 1"
           "$mainMod SHIFT, M, fullscreen, 0"
 
@@ -427,7 +435,7 @@
           "suppressevent maximize, class:.*"
           "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
           "workspace 2 silent, class:firefox"
-          "workspace 3 silent, class:^(com.ayugram.desktop|com.telegram.desktop)$"
+          "workspace 3 silent, class:^(com.ayugram.desktop|com.telegram.desktop|DeltaChat)$"
           "workspace 4, class:^(kompas.exe)$"
           "workspace 11 silent, class:org.qbittorrent.qBittorrent"
           "workspace 12 silent, class:Tor Browser"

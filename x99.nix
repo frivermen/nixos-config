@@ -48,6 +48,12 @@ in
   i18n.defaultLocale = "ru_RU.UTF-8";
   time.timeZone = "Asia/Yekaterinburg";
 
+  zramSwap = {
+    enable = true;
+    memoryPercent = 95;
+    priority = 180;
+ }; 
+
   home-manager.useGlobalPkgs = true;
   home-manager.backupFileExtension = "backup";
 
@@ -118,9 +124,15 @@ in
     xwayland.enable = true;
   };
 
-  # services.xserver.enable = true;
-  # services.xserver.displayManager.lightdm.enable = true;
-  # services.xserver.desktopManager.lxqt.enable = true;
+  services.xserver.enable = true;
+  services.xserver.displayManager.lightdm.enable = false;
+  services.xserver.desktopManager.lxqt.enable = true;
+
+  environment.variables = {
+    MESA_VK_DEVICE_SELECT = "10de:1c82"; # установите это на основе ваших идентификаторов поставщика и устройства
+    MESA_VK_DEVICE_SELECT_FORCE_DEFAULT_DEVICE = "1"; # принудительно выберите на основе MESA_VK_DEVICE_SELECT
+    LIBGL_ALWAYS_SOFTWARE = "0"; # избежать откатов программного рендеринга? (хотя я не уверен)
+  };
 
   environment.sessionVariables = {
     # fix invisible cursor
@@ -132,10 +144,16 @@ in
   # video drivers
   hardware = {
     graphics.enable = true;
-    amdgpu.legacySupport.enable = true;
+    graphics.enable32Bit = true;
+    # amdgpu.legacySupport.enable = true;
+    nvidia.modesetting.enable = true;
+    nvidia.open = false;
+    nvidia.nvidiaSettings = true;
   };
   # amd overclocking and etc.
-  services.lact.enable = true;
+  # services.lact.enable = true;
+  # nvidia enable
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   programs.firejail.enable = true;
   
@@ -172,12 +190,19 @@ in
 
   nixpkgs.config.android_sdk.accept_license = true;
 
+  services.open-webui.enable = true;
+  # services.llama-cpp = {
+  #   enable = true;
+  #   package = unstable.llama-cpp;
+  # };
+
   environment.systemPackages = with pkgs; [
     tor-browser
     # Stable packages
     android-file-transfer # android mount
     ayugram-desktop # telegram client
     telegram-desktop # telegram client
+    ffmpeg
     byedpi # dpi proxy
     dunst # notifications
     firefox 
@@ -272,13 +297,31 @@ in
     localsend
     jpegoptim
     deltachat-desktop
+    nvidia-vaapi-driver
+    vulkan-tools
+    vulkan-loader
     freecad
+    open-webui
     (python3.withPackages (python-pkgs: with python-pkgs; [
       tkinter
       pexpect
     ]))
     # Unstable packages
     unstable.nil # nix lsp for helix
+    # unstable.ollama-cpu
+    # unstable.ollama-vulkan
+    lmstudio
+    # unstable.llama-cpp
+    ((unstable.llama-cpp.override {
+      cudaSupport = true;
+    }).overrideAttrs (old: {
+      cmakeFlags = (old.cmakeFlags or []) ++ [
+        "-DCMAKE_CUDA_ARCHITECTURES=61"
+      ];
+    }))
+    cudaPackages.cudatoolkit
+    stdenv.cc.cc.lib
+    # pkgsCuda.llama-cpp
   ];
 
   fonts.packages = with pkgs; [
