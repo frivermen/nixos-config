@@ -32,12 +32,14 @@
         export NIXPKGS_ALLOW_UNFREE=1
 
         npush() {
+          echo "upload"
           git -C /etc/nixos/nixos-config/ add .
           git -C /etc/nixos/nixos-config/ commit -a -m "update"
           git -C /etc/nixos/nixos-config/ push
         }
 
         npull() {
+          echo "download"
           git -C /etc/nixos/nixos-config/ pull
         }
 
