@@ -255,12 +255,12 @@
     services.hyprpaper = {
       enable = true;
       settings = {
-        # preload = [ "/etc/nixos/nixos-config/Morskie Oko.jpg" ];
-        # wallpaper = [ ", /etc/nixos/nixos-config/Morskie Oko.jpg" ];
+        preload = [ "/etc/nixos/nixos-config/wallpapers/Morskie Oko.jpg" ];
+        wallpaper = [ ", /etc/nixos/nixos-config/wallpapers/Morskie Oko.jpg" ];
         # preload = [ "/etc/nixos/nixos-config/cow.jpg" ];
         # wallpaper = [ ", /etc/nixos/nixos-config/cow.jpg" ];
-        preload = [ "/etc/nixos/nixos-config/wallpapers/nixos-wallpapers.png" ];
-        wallpaper = [ ", /etc/nixos/nixos-config/wallpapers/nixos-wallpapers.png" ];
+        # preload = [ "/etc/nixos/nixos-config/wallpapers/nixos-wallpapers.png" ];
+        # wallpaper = [ ", /etc/nixos/nixos-config/wallpapers/nixos-wallpapers.png" ];
       };
     };
 
@@ -332,8 +332,10 @@
           rounding_power = 2;
           active_opacity = 1.0;
           inactive_opacity = 0.95;
-          blur.enabled = false;
+          # blur.enabled = false;
+          blur.enabled = true;
           shadow.enabled = true;
+          layerrule = "blur,waybar";
         };
         animations.enabled = false;
         input = {
@@ -480,8 +482,9 @@
         }
 
         window#waybar {
-            background: transparent;
-            /* background: rgba(0xfb,0xf1,0xc7,0.2); */
+            /* background: transparent; */
+            /* background: rgba(0xfb,0xf1,0xc7, 0.5); */
+            background: alpha(#fbf1c7, 0.2);
         }
 
         window#waybar.hidden {
