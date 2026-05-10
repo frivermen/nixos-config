@@ -12,7 +12,8 @@ in
     ./modules/root-home.nix
     (import "${home-manager}/nixos")
   ];
-
+  boot.binfmt.emulatedSystems = [ "armv7l-linux" ];
+  boot.binfmt.preferStaticEmulators = true;
   nixpkgs.config.allowUnfree = true;
 
   # boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -45,7 +46,7 @@ in
   };
 
   services.minidlna = {
-    enable = true;
+    enable = false;
     settings = {
       # user = "frivermen";
       media_dir = [ "/srv/minidlna/" ];
@@ -237,6 +238,7 @@ in
     # Unstable packages
     unstable.nil # nix lsp for helix
     unstable.ollama-cpu
+    zoom-us
   ];
 
   fonts.packages = with pkgs; [

@@ -273,7 +273,8 @@
         "$mainMonitor" =
           if config.networking.hostName == "x99-frivermen"
           then "HDMI-A-1"
-          else "DP-2";
+          # else "DP-2";
+          else "HDMI-A-1";
         monitor = 
           if config.networking.hostName == "x99-frivermen"
           then [
@@ -569,7 +570,7 @@
             "clock"
           ];
           "modules-right" = [
-            "temperature"
+            # "temperature"
             "memory"
             "pulseaudio"
             "hyprland/language"
@@ -602,17 +603,17 @@
               "on-scroll-down" = "shift_down";
             };
           };
-          "temperature" = {
-            "thermal-zone" = 0;
-            "hwmon-path" = [
-              "/sys/devices/platform/coretemp.0/hwmon/hwmon6/temp2_input"
-              "/sys/devices/platform/coretemp.0/hwmon/hwmon3/temp2_input"
-              "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp2_input"
-            ];
-            "format" = "{temperatureC}°C";
-            "tooltip-format" = "CPU temp";
-            "min-length" = 6;
-          };
+          # "temperature" = {
+          #   "thermal-zone" = 0;
+          #   "hwmon-path" = [
+          #     "/sys/devices/platform/coretemp.0/hwmon/hwmon6/temp2_input"
+          #     "/sys/devices/platform/coretemp.0/hwmon/hwmon3/temp2_input"
+          #     "/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp2_input"
+          #   ];
+          #   "format" = "{temperatureC}°C";
+          #   "tooltip-format" = "CPU temp";
+          #   "min-length" = 6;
+          # };
           "memory" = {
             "interval" = 10;
             "format" = " R{percentage}% S{swapPercentage}% ";
